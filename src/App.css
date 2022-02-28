@@ -1,0 +1,18 @@
+.App {
+  text-align: center;
+  background-color: #EDE5D0;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+/* https://coolors.co/262322-63372c-cacf85-8cba80-658e9c */
+
+main {
+  display: flex;
+  flex-direction: column;
+}
+
+#examples {
+  display: flex;
+  flex-direction: column;
+}
