@@ -1,0 +1,16 @@
+.CoffeeInfo {
+    font-size: 2rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+.CoffeeInfo ul {
+    list-style-type: none;
+    /* Relative to parent - component fontsize */
+    line-height: 1.6em;
+}
+
+
+.CoffeeInfo ul li span {
+    font-weight: 200;
+}

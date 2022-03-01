@@ -108,7 +108,7 @@
 
     background: #6F4E37;
     border-radius: 8px;
-    
+    transition: height 2s;
 }
 
 .thermos-window ul {
