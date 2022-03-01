@@ -1,5 +1,6 @@
 import './App.css';
-
+import CoffeeButton from './components/CoffeeButton';
+import CoffeeInfo from './components/CoffeeInfo';
 import Thermos from './components/Thermos';
 
 function App() {
@@ -12,6 +13,16 @@ function App() {
         <div id="examples">
           <h2>Examples</h2>
           <Thermos {...coffee} />
+
+          <CoffeeInfo {...coffee} />
+
+          <CoffeeButton />
+
+          <CoffeeButton litersToBrew='1.1' />
+
+          <CoffeeButton litersToBrew='0.5' />
+
+          <CoffeeButton litersToBrew='3.1' />
 
         </div>
 
