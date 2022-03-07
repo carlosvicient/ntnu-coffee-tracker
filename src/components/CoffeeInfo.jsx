@@ -33,8 +33,11 @@ const CoffeeInfo = (props) => {
     const calendarStrings = {
         lastDay: '[Yesterday] ',
         sameDay: '[Today]',
-        nextDay: '[Tomorrow at] LT'
+        nextDay: 'DD/MM/YYYY',
+        lastWeek: 'DD/MM/YYYY',
+        sameElse: 'DD/MM/YYYY'
     };
+
 
     const diff = moment().diff(brewedAt, 'minutes');
     console.log("dif - ", diff);
@@ -46,7 +49,7 @@ const CoffeeInfo = (props) => {
         <div className="CoffeeInfo">
             <ul>
                 <li><span>Brewed </span><Moment calendar={calendarStrings}>{brewedAt}</Moment></li>
-                <li><span>Time </span><Moment format="hh:mm">{brewedAt}</Moment></li>
+                <li><span>Time </span><Moment format="hh:mm[h]">{brewedAt}</Moment></li>
                 <li><span>Liters brewed </span>{litersBrewed}</li>
                 <li><span>Type of coffee </span>{typeOfCoffee}</li>
                 <li><span>Coffee left </span>{coffeeLeft}</li>
