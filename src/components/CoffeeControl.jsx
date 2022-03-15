@@ -1,35 +1,33 @@
-import React, { Component } from 'react';
 import CoffeeButton from './CoffeeButton';
 import './CoffeeControl.css';
 import Thermos from './Thermos';
 
-class CoffeeControl extends Component {
-    constructor(props) {
-        super(props);
-        //Careful! This is an anti-pattern (more in the future)
-        this.state = { ...props }
+const CoffeeControl = (props) => {
+
+    const handleOnClick = (newLiters) => {
+        console.log("CoffeeControl (handleClick): ",  newLiters);
+        props.onChange(newLiters);
     }
 
-    handleOnClick = (newLiters) => {
-        console.log(newLiters);
-        this.setState({ litersBrewed: newLiters });
-    }
+    return (
+        <div className="CoffeeControl">
+            <Thermos {...props} />
 
-    render() {
-        return (
-            <div className="CoffeeControl">
-                <Thermos {...this.state} />
+            <div className="flex-columns">
+                <CoffeeButton litersToBrew='2.2' onClick={handleOnClick} />
 
-                <div className="flex-columns">
-                    <CoffeeButton litersToBrew='2.2' onClick={this.handleOnClick}/>
+                <CoffeeButton litersToBrew='1.1' onClick={handleOnClick} />
 
-                    <CoffeeButton litersToBrew='1.1' onClick={this.handleOnClick}/>
-
-                    <CoffeeButton litersToBrew='0.5' onClick={this.handleOnClick}/>
-                </div>
+                <CoffeeButton litersToBrew='0.5' onClick={handleOnClick} />
             </div>
-        );
-    }
+        </div>
+    );
+}
+
+//Default props here to define empty function to lift state up
+CoffeeControl.defaultProps = {
+    onChange: () => {}
 }
 
 export default CoffeeControl;
+

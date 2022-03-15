@@ -1,62 +1,94 @@
+import React, { Component } from 'react';
+
 import './App.css';
 import CoffeeButton from './components/CoffeeButton';
 import CoffeeControl from './components/CoffeeControl';
 import CoffeeInfo from './components/CoffeeInfo';
 import Thermos from './components/Thermos';
 
-function App() {
-  const coffee = { brewedAt: '2022-02-28T09:17:57.652Z', litersBrewed: '1.5' };
-  return (
-    <div className="App">
-      <header></header>
-      <main>
+import moment from 'moment';
 
-        <div id="examples">
-          <h1>Examples</h1>
-          <Thermos {...coffee} />
+// Coffee:
+// { brewedAt, litersBrewed, typeOfCoffee, coffeeLeft, grindingSettings}
+// litersToBrew
 
-          {/* <Thermos {...coffee} className="neumorphism-card"/> */}
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      coffee: {
+        brewedAt: '2022-02-28T09:17:57.652Z',
+        litersBrewed: '1.5'
+      }
+    };
+  }
 
-          <CoffeeInfo {...coffee} />
+  handleNewCoffee = (newLitres) => {
+    console.log("App.js -> New coffee!!!", newLitres);
+    //New coffee ready. This is:
+    //litersBrewed = newLitres
+    //brewAt = current datew
+    this.setState({ 
+      coffee: { 
+        litersBrewed: newLitres,
+        brewedAt: moment().toISOString()
+      } 
+    });
+  }
 
-          <CoffeeButton />
+  render() {
+    return (
+      <div className="App">
+        <header></header>
+        <main>
 
-          <CoffeeButton litersToBrew='1.1' />
+          <div id="examples">
+            <h1>Examples</h1>
+            <Thermos {...this.state.coffee} />
 
-          <CoffeeButton litersToBrew='0.5' />
+            {/* <Thermos {...coffee} className="neumorphism-card"/> */}
 
-          <CoffeeButton litersToBrew='3.1' />
-        </div>
+            <CoffeeInfo {...this.state.coffee} />
 
-        <span>This is Thermos and CoffeeInfo</span>
-        <section id="top-container" className="container neumorphism-card">
-          <Thermos {...coffee} />
-          <CoffeeInfo {...coffee} />
-        </section>
+            <CoffeeButton onClick={this.handleNewCoffee}/>
 
-        <span>This is Thermos and CoffeeButtons (individual components)</span>
-        <section id="prepare-coffee-container" className="container neumorphism-card">
-          <Thermos {...coffee} />
+            <CoffeeButton litersToBrew='1.1' onClick={this.handleNewCoffee}/>
 
-          <div className="flex-columns">
-            <CoffeeButton litersToBrew='2.1' />
+            <CoffeeButton litersToBrew='0.5' onClick={this.handleNewCoffee}/>
 
-            <CoffeeButton litersToBrew='1.1' />
-
-            <CoffeeButton litersToBrew='0.5' />
+            <CoffeeButton litersToBrew='3.1' onClick={this.handleNewCoffee}/>
           </div>
 
-        </section>
+          <span>This is Thermos and CoffeeInfo</span>
+          <section id="top-container" className="container neumorphism-card">
+            <Thermos {...this.state.coffee} />
+            <CoffeeInfo {...this.state.coffee} />
+          </section>
+
+          <span>This is Thermos and CoffeeButtons (individual components)</span>
+          <section id="prepare-coffee-container" className="container neumorphism-card">
+            <Thermos {...this.state.coffee} />
+
+            <div className="flex-columns">
+              <CoffeeButton litersToBrew='2.1' onClick={this.handleNewCoffee}/>
+
+              <CoffeeButton litersToBrew='1.1' onClick={this.handleNewCoffee}/>
+
+              <CoffeeButton litersToBrew='0.5' onClick={this.handleNewCoffee}/>
+            </div>
+
+          </section>
 
 
-        <span>This is CoffeeControl (composition: Thermos and CoffeeButton(s)))</span>
-        <section>
-          <CoffeeControl {...coffee} />
-        </section>
+          <span>This is CoffeeControl (composition: Thermos and CoffeeButton(s)))</span>
+          <section>
+            <CoffeeControl {...this.state.coffee} onChange={this.handleNewCoffee} />
+          </section>
 
-      </main>
-    </div>
-  );
+        </main>
+      </div>
+    );
+  }
 }
 
 export default App;
